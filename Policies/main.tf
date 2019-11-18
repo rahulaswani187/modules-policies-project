@@ -1,6 +1,6 @@
 provider "google" {
- credentials = "${file("Terraform Project-77797bdb9a02.json")}"
- project     = "terraform-project-258803"
+ credentials = "${file("terraform-project-259404-e5f79aa9cb79.json")}"
+ project     = "terraform-project-259404"
  region      = "australia-southeast1"
 }
 
@@ -11,7 +11,7 @@ resource "random_id" "instance_id" {
 
 // A single Google Cloud Engine instance
 resource "google_compute_instance" "default" {
- name         = "flask-vm-${random_id.instance_id.hex}"
+ name         = "my-vm-${random_id.instance_id.hex}"
  machine_type = "f1-micro"
  zone         = "australia-southeast1-a"
 
@@ -22,7 +22,7 @@ resource "google_compute_instance" "default" {
  }
 
 metadata = {
-   ssh-keys = "rahul:${file("my-ssh-key.pub")}"
+   ssh-keys = "rahul:${file("/Users/rahulaswaniwork/.ssh/my-key.pub")}"
  }
 
 
@@ -54,12 +54,12 @@ variable "tfe_organization" {
     description = "Organization to apply changes to"
     default = "SOI-Platform"
 }
-
-provider "tfe" {
-    hostname = "${var.tfe_hostname}"
-    token = "${var.tfe_token}"
-    version = "~> 0.6"
-}
+#
+#provider "tfe" {
+#    hostname = "${var.tfe_hostname}"
+#    token = "${var.tfe_token}"
+#    version = "~> 0.6"
+#}
 
 #resource "tfe_sentinel_policy" "gcp-restrict-machine-type" {
 #  name         = "gcp-restrict-machine-type"
